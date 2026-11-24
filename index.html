@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation - Rajesh & Akshitha</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config (inline – required right after CDN) -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              vermilion: "#8B0000",
+              royalCrimson: "#5C0612",
+              royalRed: "#800020",
+              deepGold: "#D4AF37",
+              brightGold: "#FFD700",
+              marigold: "#FF9933",
+              saffron: "#FF7722",
+              ivoryCream: "#FFFDF5",
+              sandstone: "#F7E7CE",
+            },
+            fontFamily: {
+              cinzel: ["Cinzel", "serif"],
+              rozha: ["Rozha One", "serif"],
+              yatra: ["Yatra One", "cursive"],
+              script: ["Great Vibes", "cursive"],
+              sans: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Great+Vibes&family=Rozha+One&family=Yatra+One&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="font-sans text-gray-800 bg-[#FFFDF5] relative overflow-x-hidden">
+    <!-- Opening Wedding Invitation -->
+    <!-- Wedding Envelope Opening Screen -->
+    <div id="openingInvitation" class="wedding-envelope">
+      <!-- Envelope Flap -->
+      <div class="envelope-flap"></div>
+
+      <!-- Flower Seal -->
+      <button
+        id="openInvitationBtn"
+        class="envelope-seal"
+        aria-label="Open wedding invitation"
+      >
+        <img
+          src="./images/button.png"
+          alt="Wedding Logo"
+          class="envelope-logo"
+        />
+      </button>
+
+      <!-- Opening Instruction -->
+      <p class="envelope-instruction">Tap to open</p>
+    </div>
+
+    <!-- Main Wedding Website: Hidden Until Invitation Opens -->
+    <div id="siteContent" class="site-content">
+      <!-- Background Music (Full Song) -->
+      <audio id="bgMusic" loop preload="auto">
+        <source src="Wedding_Song.mp3" type="audio/mpeg" />
+      </audio>
+
+      <!-- Toran Top Decorative Bar -->
+      <div class="toran-border sticky top-0 z-40"></div>
+
+      <!-- Interactive Canvas for Floating Marigold & Rose Petals -->
+      <canvas id="petalCanvas"></canvas>
+
+      <!-- Floating Audio & Petal Animation Controls -->
+      <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 items-end">
+        <button
+          id="petalToggleBtn"
+          onclick="togglePetals()"
+          class="w-10 h-10 rounded-full bg-white text-saffron border-2 border-deepGold shadow-2xl flex items-center justify-center hover:bg-amber-50 transition transform hover:scale-110"
+          title="Toggle Falling Petals"
+        >
+          <i id="petalIcon" class="fa-solid fa-spa text-lg"></i>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <span
+            id="musicStatus"
+            class="hidden md:inline-block bg-royalCrimson text-brightGold text-xs font-cinzel px-3 py-1 rounded-full shadow border border-deepGold transition-opacity duration-300 opacity-0"
+          >
+            Wedding Song
+          </span>
+          <button
+            id="musicToggleBtn"
+            onclick="toggleAudio()"
+            class="w-10 h-10 rounded-full bg-royalRed text-brightGold border-2 border-brightGold shadow-2xl flex items-center justify-center hover:bg-royalCrimson transition transform hover:scale-105"
+            title="Play Wedding Song"
+          >
+            <i
+              id="musicIcon"
+              class="fa-solid fa-compact-disc text-xl animate-spin-slow"
+            ></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav
+        class="sticky top-2 z-30 bg-royalCrimson/95 backdrop-blur-md border-b-2 border-deepGold shadow-lg mx-2 md:mx-6 rounded-2xl"
+      >
+        <div
+          class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center"
+        >
+          <a
+            href="#"
+            class="font-cinzel text-xl md:text-2xl font-bold gold-text flex w-full items-center justify-center gap-2 text-center"
+          >
+            <span>卐</span>
+            <span>WEDDING INVITATION</span>
+            <span>卐</span>
+          </a>
+          <div
+            class="hidden md:flex space-x-6 font-cinzel tracking-wider text-xs uppercase font-semibold text-brightGold"
+          >
+            <a href="#shloka" class="hover:text-white transition">Shloka</a>
+            <a href="#couple" class="hover:text-white transition"
+              >Groom & Bride</a
+            >
+            <a href="#rituals" class="hover:text-white transition"
+              >Rituals / Events</a
+            >
+            <a href="#venue" class="hover:text-white transition"
+              >Venue & Muhurat</a
+            >
+            <a href="#rsvp" class="hover:text-white transition"
+              >RSVP & Blessings</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <!-- HERO / SHLOKA SECTION -->
+      <section
+        id="shloka"
+        class="relative min-h-[92vh] flex items-center justify-center text-center px-4 py-12 royal-red-bg text-white overflow-hidden mandap-pattern"
+      >
+        <div
+          class="absolute top-4 left-4 text-brightGold/20 text-6xl pointer-events-none select-none"
+        >
+          🪔
+        </div>
+        <div
+          class="absolute top-4 right-4 text-brightGold/20 text-6xl pointer-events-none select-none"
+        >
+          🪔
+        </div>
+        <div
+          class="absolute top-4 right-4 text-brightGold/20 text-6xl pointer-events-none select-none"
+        >
+          🪔
+        </div>
+        <div
+          class="absolute top-4 right-4 text-brightGold/20 text-6xl pointer-events-none select-none"
+        >
+          🪔
+        </div>
+
+        <div
+          class="max-w-3xl mx-auto z-10 space-y-6 bg-royalCrimson/80 p-6 md:p-12 rounded-3xl border-2 border-deepGold shadow-2xl relative"
+        >
+          <div
+            class="w-24 h-24 mx-auto rounded-full bg-gradient-to-b from-brightGold to-deepGold p-1 shadow-2xl flex items-center justify-center"
+          >
+            <div class="ganesha-logo-container">
+              <img
+                src="images/ganesha1.png"
+                alt="Lord Ganesha"
+                class="ganesha-logo"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <p
+              class="font-yatra text-gold-text text-lg md:text-2xl tracking-wide"
+            >
+              || శ్రీ గణేశాయ నమః ||
+            </p>
+            <div
+              class="w-24 h-0.5 bg-gradient-to-r from-transparent via-brightGold to-transparent mx-auto my-2"
+            ></div>
+            <p
+              class="font-serif italic text-amber-200 text-xs md:text-sm max-w-lg mx-auto leading-relaxed px-4"
+            >
+              "వక్రతుండ మహాకాయ సూర్యకోటి సమప్రభ । నిర్విఘ్నం కురు మే దేవ
+              సర్వకార్యేషు సర్వదా ॥"
+            </p>
+            <p class="text-[11px] font-sans text-amber-100/70 tracking-wider">
+              (O Lord Ganesha with a curved trunk and massive body, having the
+              radiance of a million suns, please make all our endeavors free of
+              obstacles always.)
+            </p>
+          </div>
+
+          <div class="inline-block border-y border-deepGold/60 py-1.5 px-8">
+            <p
+              class="font-cinzel uppercase tracking-[0.25em] text-xs md:text-sm text-brightGold font-semibold"
+            >
+              Wedding Invitation
+            </p>
+          </div>
+
+          <!-- WEDDING SCRATCH CARD -->
+          <div class="wedding-scratch-card">
+            <!-- Hidden Wedding Names -->
+            <div class="scratch-hidden-content">
+              <h1
+                class="font-rozha text-4xl md:text-6xl text-white tracking-wide my-2 leading-tight"
+              >
+                Rajesh
+
+                <br />
+
+                <span
+                  class="gold-text font-script text-4xl md:text-6xl font-normal"
+                >
+                  ❤️
+                </span>
+
+                <br />
+
+                Akshitha
+              </h1>
+            </div>
+
+            <!-- Scratch Cover -->
+            <canvas id="scratchCanvas"></canvas>
+
+            <!-- Scratch Instruction -->
+            <div class="scratch-instruction" id="scratchInstruction">
+              <span>SCRATCH</span>
+            </div>
+          </div>
+
+          <p
+            class="font-sans text-xs md:text-sm text-amber-100 max-w-md mx-auto tracking-wide"
+          >
+            Sollicit your gracious presence to bestow your blessings upon the
+            holy union of their children.
+          </p>
+
+          <div class="pt-4 border-t border-deepGold/40 mt-6">
+            <p
+              class="font-cinzel text-xs tracking-widest uppercase text-brightGold mb-3"
+            >
+              Countdown to Auspicious Pelli Muhurtham
+            </p>
+            <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+              <div
+                class="bg-royalRed/90 p-3 rounded-xl border border-deepGold/50 text-center shadow"
+              >
+                <span
+                  id="days"
+                  class="block font-cinzel text-xl md:text-3xl font-bold text-brightGold"
+                  >00</span
+                >
+                <span
+                  class="text-[10px] text-amber-200 font-sans tracking-wider uppercase"
+                  >Days</span
+                >
+              </div>
+              <div
+                class="bg-royalRed/90 p-3 rounded-xl border border-deepGold/50 text-center shadow"
+              >
+                <span
+                  id="hours"
+                  class="block font-cinzel text-xl md:text-3xl font-bold text-brightGold"
+                  >00</span
+                >
+                <span
+                  class="text-[10px] text-amber-200 font-sans tracking-wider uppercase"
+                  >Hours</span
+                >
+              </div>
+              <div
+                class="bg-royalRed/90 p-3 rounded-xl border border-deepGold/50 text-center shadow"
+              >
+                <span
+                  id="minutes"
+                  class="block font-cinzel text-xl md:text-3xl font-bold text-brightGold"
+                  >00</span
+                >
+                <span
+                  class="text-[10px] text-amber-200 font-sans tracking-wider uppercase"
+                  >Mins</span
+                >
+              </div>
+              <div
+                class="bg-royalRed/90 p-3 rounded-xl border border-deepGold/50 text-center shadow"
+              >
+                <span
+                  id="seconds"
+                  class="block font-cinzel text-xl md:text-3xl font-bold text-brightGold"
+                  >00</span
+                >
+                <span
+                  class="text-[10px] text-amber-200 font-sans tracking-wider uppercase"
+                  >Secs</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a
+              href="#rsvp"
+              class="bg-gradient-to-r from-brightGold to-deepGold text-royalCrimson font-cinzel font-bold text-xs uppercase tracking-widest px-7 py-3 rounded-full shadow-xl hover:brightness-110 transition transform hover:-translate-y-0.5"
+            >
+              Send Blessings
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BRIDE & GROOM SECTION -->
+      <section id="couple" class="py-12 px-3 bg-[#FFFDF5] relative">
+        <div class="max-w-5xl mx-auto">
+          <!-- Section Heading -->
+          <div class="text-center mb-10">
+            <span class="font-script text-xl md:text-3xl text-saffron block">
+              With the blessings of ancestors &amp; elders
+            </span>
+
+            <h2
+              class="font-cinzel text-xl md:text-4xl text-royalRed uppercase tracking-wide md:tracking-widest font-bold"
+            >
+              The Bride &amp; Groom
+            </h2>
+
+            <div
+              class="w-20 h-1 bg-gradient-to-r from-transparent via-deepGold to-transparent mx-auto mt-3"
+            ></div>
+          </div>
+
+          <!-- Cards Grid: Always two columns -->
+          <div class="grid grid-cols-1 gap-8 items-stretch">
+            <!-- Groom Card -->
+            <div
+              class="glass-card w-full min-w-0 box-border p-3 md:p-8 rounded-2xl md:rounded-3xl border-2 border-deepGold/40 text-center relative shadow-lg flex flex-col justify-between"
+            >
+              <!-- Card Label -->
+              <div
+                class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 bg-marigold text-white font-cinzel text-[9px] md:text-xs uppercase px-3 md:px-4 py-1 rounded-full font-bold shadow whitespace-nowrap"
+              >
+                Groom (వరుడు)
+              </div>
+
+              <!-- Groom Details -->
+              <div class="pt-4 min-w-0">
+                <div
+                  class="w-28 h-28 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-deepGold mb-3 md:mb-4 shadow-md"
+                >
+                  <img
+                    src="./images/groom.jpeg"
+                    alt="Groom Rajesh"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <h3
+                  class="font-rozha text-2xl md:text-3xl text-royalCrimson mb-1"
+                >
+                  RAJESH
+                </h3>
+
+                <p
+                  class="text-[11px] md:text-[10px] font-cinzel text-saffron font-bold uppercase tracking-normal mb-3 text-center break-words"
+                >
+                  S/O SHRI UPPUTURU RAMAMOHAN &amp; SMT. RADHAMMA
+                  <br />
+                  <strong class="text-[12px] md:text-[10px] normal-case">
+                    (శ్రీ ఉప్పుటూరి రామ్మోహన్ - శ్రీమతి రాధమ్మ)
+                  </strong>
+                </p>
+              </div>
+
+              <!-- Groom Residence -->
+              <div
+                class="mt-3 md:mt-6 pt-3 md:pt-4 border-t border-deepGold/30 text-[9px] md:text-xs text-gray-500 font-sans break-words"
+              >
+                📍 <strong>Residence:</strong> J.R. PETA, LAWYER NAZEER STREET,
+                ATMAKUR, NELLORE DISTRICT
+              </div>
+            </div>
+
+            <!-- Bride Card -->
+            <div
+              class="glass-card w-full min-w-0 box-border p-3 md:p-8 rounded-2xl md:rounded-3xl border-2 border-deepGold/40 text-center relative shadow-lg flex flex-col justify-between"
+            >
+              <!-- Card Label -->
+              <div
+                class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 bg-royalRed text-brightGold font-cinzel text-[9px] md:text-xs uppercase px-3 md:px-4 py-1 rounded-full font-bold shadow whitespace-nowrap"
+              >
+                Bride (వధువు)
+              </div>
+
+              <!-- Bride Details -->
+              <div class="pt-4 min-w-0">
+                <div
+                  class="w-28 h-28 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-deepGold mb-3 md:mb-4 shadow-md"
+                >
+                  <img
+                    src="./images/bride.jpeg"
+                    alt="Bride Akshitha"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <h3
+                  class="font-rozha text-2xl md:text-3xl text-royalCrimson mb-1"
+                >
+                  AKSHITHA
+                </h3>
+
+                <p
+                  class="text-[11px] md:text-[10px] font-cinzel text-saffron font-bold uppercase tracking-normal mb-3 text-center break-words"
+                >
+                  D/O SHRI NADELLA VENKATA RAO (LATE) &amp; SMT. PRASANNA
+                  <br />
+                  <strong class="text-[12px] md:text-[10px] normal-case">
+                    (శ్రీ నాదెళ్ల వెంకట్రావు (లేట్) - శ్రీమతి ప్రసన్న)
+                  </strong>
+                </p>
+              </div>
+
+              <!-- Bride Residence -->
+              <div
+                class="mt-3 md:mt-6 pt-3 md:pt-4 border-t border-deepGold/30 text-[9px] md:text-xs text-gray-500 font-sans break-words"
+              >
+                📍 <strong>Residence:</strong> PADAMATI MANGALAPALEM, KANDUKUR
+                MANDAL, PRAKASAM DISTRICT
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RITUALS SECTION -->
+      <section id="rituals" class="py-20 px-4 bg-rose-50/60 relative">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-14">
+            <span class="font-script text-3xl text-saffron block"
+              >Sacred Ceremonies</span
+            >
+            <h2
+              class="font-cinzel text-3xl md:text-4xl text-royalRed uppercase tracking-widest font-bold"
+            >
+              Wedding Celebrations
+            </h2>
+            <p
+              class="text-xs text-gray-600 tracking-widest uppercase font-sans mt-2"
+            >
+              Join us for the multi-day auspicious rituals
+            </p>
+            <div
+              class="w-20 h-1 bg-gradient-to-r from-transparent via-deepGold to-transparent mx-auto mt-3"
+            ></div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Day 1 -->
+            <div
+              class="bg-royalCrimson text-white rounded-3xl p-6 border-2 border-brightGold shadow-xl relative flex flex-col justify-between hover:shadow-2xl transition"
+            >
+              <div
+                class="absolute -top-4 left-6 bg-brightGold text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full uppercase"
+              >
+                Day 1 • December 11, 2026
+              </div>
+              <div class="pt-4">
+                <div class="flex justify-center items-center mb-3">
+                  <img
+                    src="./images/Haldi.png"
+                    alt="Wedding Decoration"
+                    class="w-50 h-25 object-contain mx-auto"
+                  />
+                </div>
+                <h3 class="font-rozha text-2xl gold-text mb-1">
+                  Haldi Ceremony
+                </h3>
+                <p
+                  class="text-xs font-cinzel font-bold text-amber-300 uppercase mb-4"
+                >
+                  <strong>Yellow vibes only </strong>
+                </p>
+
+                <div class="space-y-3 text-sm text-amber-100 font-sans">
+                  <p>
+                    <i class="fa-regular fa-clock text-brightGold mr-2"></i
+                    ><strong>Time:</strong> 9:00 AM Onwards
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-shirt text-brightGold mr-2"></i
+                    ><strong>Dress Code:</strong> Traditional Yellow Attire
+                  </p>
+                  <p
+                    class="text-xs text-amber-200/80 italic border-t border-amber-800/80 pt-3"
+                  >
+                    A traditional Haldi ceremony featuring the application of
+                    auspicious turmeric paste, accompanied by joyful folk songs,
+                    blessings, and vibrant celebrations.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-6 pt-3 text-center bg-royalRed rounded-xl py-2 text-xs font-cinzel text-brightGold font-bold border border-deepGold"
+              >
+                Venue: At Our Home
+              </div>
+            </div>
+
+            <!-- Day 1 -->
+            <div
+              class="bg-royalCrimson text-white rounded-3xl p-6 border-2 border-brightGold shadow-xl relative flex flex-col justify-between hover:shadow-2xl transition"
+            >
+              <div
+                class="absolute -top-4 left-6 bg-brightGold text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full uppercase"
+              >
+                Day 1 • December 11, 2026
+              </div>
+              <div class="pt-4">
+                <img
+                  src="./images/Sangeeth.png"
+                  alt="Wedding Decoration"
+                  class="w-50 h-25 object-contain mx-auto"
+                />
+                <h3 class="font-rozha text-2xl gold-text mb-1">Sangeeth</h3>
+                <p
+                  class="text-xs font-cinzel font-bold text-amber-300 uppercase mb-4"
+                >
+                  An Evening of Music & Celebration
+                </p>
+                <div class="space-y-3 text-sm text-amber-100 font-sans">
+                  <p>
+                    <i class="fa-regular fa-clock text-brightGold mr-2"></i>
+                    <strong>Event Time:</strong> 8:00 PM onwards
+                  </p>
+
+                  <p>
+                    <i class="fa-solid fa-music text-brightGold mr-2"></i>
+                    <strong>Celebration:</strong> Dance & Musical Performances
+                  </p>
+
+                  <p>
+                    <i class="fa-solid fa-shirt text-brightGold mr-2"></i>
+                    <strong>Dress Code:</strong> Traditional Black Attire
+                  </p>
+
+                  <p
+                    class="text-xs text-amber-200/80 italic border-t border-amber-800/80 pt-3"
+                  >
+                    A joyful evening filled with music, dance performances,
+                    laughter, and beautiful family moments as we celebrate this
+                    special occasion together.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-6 pt-3 text-center bg-royalRed rounded-xl py-2 text-xs font-cinzel text-brightGold font-bold border border-deepGold"
+              >
+                Venue: At Our Home
+              </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div
+              class="bg-amber-950 text-white rounded-3xl p-6 border-2 border-brightGold shadow-xl relative flex flex-col justify-between hover:shadow-2xl transition"
+            >
+              <div
+                class="absolute -top-4 left-6 bg-gradient-to-r from-brightGold to-deepGold text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full uppercase"
+              >
+                Day 2 • December 12, 2026
+              </div>
+              <div class="pt-4">
+                <img
+                  src="./images/baldaasulu.png"
+                  alt="Wedding Decoration"
+                  class="w-50 h-25 object-contain mx-auto"
+                />
+                <h3 class="font-rozha text-2xl gold-text mb-1">Baldaasulu</h3>
+                <div class="space-y-3 text-sm text-amber-100 font-sans">
+                  <p>
+                    <i class="fa-regular fa-clock text-brightGold mr-2"></i
+                    ><strong>Time:</strong> 7:00 AM Onwards
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-shirt text-brightGold mr-2"></i
+                    ><strong>Dress Code:</strong> Traditional Attire
+                  </p>
+                  <p
+                    class="text-xs text-amber-200/80 italic border-t border-amber-800/80 pt-3"
+                  >
+                    A beautiful celebration of tradition and family, as five
+                    brothers, including the groom, come together in a joyful
+                    procession from the temple to our home, sharing blessings,
+                    love, and cherished memories.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-6 pt-3 text-center bg-royalCrimson/80 rounded-xl py-2 text-xs font-cinzel text-brightGold font-bold border border-deepGold"
+              >
+                Venue: Sri Venkateswara Swamy Temple
+              </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div
+              class="bg-amber-950 text-white rounded-3xl p-6 border-2 border-brightGold shadow-xl relative flex flex-col justify-between hover:shadow-2xl transition"
+            >
+              <div
+                class="absolute -top-4 left-6 bg-gradient-to-r from-brightGold to-deepGold text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full uppercase"
+              >
+                Day 2 • December 12, 2026
+              </div>
+              <div class="pt-4">
+                <img
+                  src="./images/Gandhapu nanugu.png"
+                  alt="Wedding Decoration"
+                  class="w-50 h-25 object-contain mx-auto"
+                />
+                <h3 class="font-rozha text-2xl gold-text mb-1">
+                  Gandhapu Nalugu
+                </h3>
+                <div class="space-y-3 text-sm text-amber-100 font-sans">
+                  <p>
+                    <i class="fa-regular fa-clock text-brightGold mr-2"></i
+                    ><strong>Time:</strong> 5:00 PM Onwards
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-shirt text-brightGold mr-2"></i
+                    ><strong>Dress Code:</strong> Indo-Western / Glamorous
+                    Evening
+                  </p>
+                  <p
+                    class="text-xs text-amber-200/80 italic border-t border-amber-800/80 pt-3"
+                  >
+                    A joyful celebration of tradition, love, and family, filled
+                    with the beautiful Gandhapu Nalugu ceremony and auspicious
+                    blessings.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-6 pt-3 text-center bg-royalCrimson/80 rounded-xl py-2 text-xs font-cinzel text-brightGold font-bold border border-deepGold"
+              >
+                Venue: Ravi Teja Kalyanamandapam
+              </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div
+              class="bg-royalCrimson text-white rounded-3xl p-6 border-2 border-brightGold shadow-xl relative flex flex-col justify-between hover:shadow-2xl transition"
+            >
+              <div
+                class="absolute -top-4 left-6 bg-brightGold text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full uppercase"
+              >
+                Day 2 • December 12, 2026
+              </div>
+              <div class="pt-4">
+                <img
+                  src="./images/wedding.png"
+                  alt="Wedding Decoration"
+                  class="w-50 h-25 object-contain mx-auto"
+                />
+                <h3 class="font-rozha text-2xl gold-text mb-1">Wedding</h3>
+                <p
+                  class="text-xs font-cinzel font-bold text-amber-300 uppercase mb-4"
+                >
+                  Two Hearts, One Soul, Forever Together
+                </p>
+                <div class="space-y-3 text-sm text-amber-100 font-sans">
+                  <p>
+                    <i class="fa-solid fa-om text-brightGold mr-2"></i
+                    ><strong>Pelli Muhurtham:</strong> 8:24 PM - 8:28 PM
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-shirt text-brightGold mr-2"></i
+                    ><strong>Dress Code:</strong> Traditional Indian Attire
+                  </p>
+                  <p>
+                    <i class="fa-regular fa-clock text-brightGold mr-2"></i
+                    ><strong>Vindu Bhojanam:</strong> 8:00 PM
+                  </p>
+                  <p
+                    class="text-xs text-amber-200/80 italic border-t border-amber-800/80 pt-3"
+                  >
+                    A beautiful celebration of love, where two hearts are tied
+                    together in the sacred bond of marriage, becoming one and
+                    beginning a wonderful journey filled with love, happiness,
+                    and togetherness.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="mt-6 pt-3 text-center bg-royalRed rounded-xl py-2 text-xs font-cinzel text-brightGold font-bold border border-deepGold"
+              >
+                Venue: Ravi Teja Kalyanamandapam
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VENUE SECTION -->
+      <section
+        id="venue"
+        class="py-20 px-4 bg-[#FFFDF5] border-t border-deepGold/30"
+      >
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center mb-12">
+            <span class="font-script text-3xl text-saffron block"
+              >Venue Details</span
+            >
+            <h2
+              class="font-cinzel text-3xl md:text-4xl text-royalRed uppercase tracking-widest font-bold"
+            >
+              Modern Minimalist Wedding Venue
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 items-stretch">
+            <div
+              class="glass-card p-8 rounded-3xl border-2 border-deepGold/40 flex flex-col justify-between shadow-lg"
+            >
+              <div>
+                <div class="text-center">
+                  <div
+                    class="inline-block bg-royalRed text-brightGold font-cinzel text-[15px] uppercase font-bold px-3 py-1 rounded-full mb-3"
+                  >
+                    Ravi Teja Kalyanamandapam
+                  </div>
+                </div>
+
+                <p class="text-sm text-gray-700 mb-6 font-sans">
+                  <i class="fa-solid fa-location-dot text-saffron mr-2"></i>
+                  Bypass Road, Atmakur, Nellore district, Andhra Pradesh
+                  (524322)
+                </p>
+
+                <div
+                  class="space-y-4 text-xs md:text-sm text-gray-700 font-sans"
+                >
+                  <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-utensils text-saffron mt-1"></i>
+                    <div>
+                      <strong class="block font-cinzel text-royalRed"
+                        >Pure Vegetarian Feast</strong
+                      >
+                      Enjoy authentic Andhra delicacies, traditional vegetarian
+                      dishes, flavorful curries, and delicious homemade sweets
+                      served with love.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-4 border-t border-deepGold/30">
+                <a
+                  href="https://maps.app.goo.gl/vHeW42QqAXnA5zuk8"
+                  target="_blank"
+                  rel="noopener"
+                  class="block text-center bg-gradient-to-r from-royalRed to-royalCrimson text-brightGold font-cinzel font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow hover:brightness-110 transition"
+                >
+                  <i class="fa-solid fa-map-location-dot mr-2"></i> Get Map
+                  Directions
+                </a>
+              </div>
+            </div>
+
+            <div
+              class="relative min-h-[300px] rounded-3xl overflow-hidden shadow-lg border-2 border-deepGold/40"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.678668193753!2d79.62798797457313!3d14.61737207666693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4ca4b44cb34919%3A0x6a0bab076f327ebe!2sRavi%20Teja%20Kalyanamandapam!5e0!3m2!1sen!2ssg!4v1795406652264!5m2!1sen!2ssg"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXECUTIVES & FAMILY MEMBERS SECTION -->
+      <section
+        id="executives"
+        class="py-20 px-4 bg-[#FFFDF5] relative overflow-hidden"
+      >
+        <div class="max-w-6xl mx-auto">
+          <!-- Section Heading -->
+          <div class="text-center mb-14">
+            <span class="font-script text-3xl text-saffron block">
+              With Love & Blessings
+            </span>
+
+            <h2
+              class="font-cinzel text-3xl md:text-4xl text-royalRed uppercase tracking-widest font-bold mt-2"
+            >
+              Executives & Family Members (కార్యనిర్వాహకులు)
+            </h2>
+
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-transparent via-deepGold to-transparent mx-auto mt-4"
+            ></div>
+
+            <p class="text-sm text-gray-600 mt-5 max-w-xl mx-auto">
+              The families and elders who lovingly invite you to celebrate the
+              auspicious wedding of Rajesh & Akshitha.
+            </p>
+          </div>
+
+          <!-- Family Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Family 1 -->
+            <div
+              class="glass-card rounded-2xl p-6 text-center border-2 border-deepGold/40 shadow-lg hover:shadow-xl transition duration-300"
+            >
+              <p
+                class="text-xs md:text-sm text-gray-600 leading-relaxed whitespace-nowrap"
+              >
+                <strong>Sri Mangalapuri Mohan Kumar - Smt. Shailaja</strong>
+              </p>
+
+              <p
+                class="text-xs md:text-sm text-gray-600 leading-relaxed whitespace-nowrap"
+              >
+                <strong>(శ్రీ మంగలపూరి మోహన్ కుమార్ - శ్రీమతి శైలజ)</strong>
+              </p>
+            </div>
+
+            <!-- Family 2 -->
+            <div
+              class="glass-card rounded-2xl p-6 text-center border-2 border-deepGold/40 shadow-lg hover:shadow-xl transition duration-300"
+            >
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>Sri Upputuru Rajendra - Smt. Harichandana</strong>
+              </p>
+
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>(శ్రీ ఉప్పుటూరు రాజేంద్ర - శ్రీమతి హరిచందన)</strong>
+              </p>
+            </div>
+
+            <!-- Family 3 -->
+            <div
+              class="glass-card rounded-2xl p-6 text-center border-2 border-deepGold/40 shadow-lg hover:shadow-xl transition duration-300"
+            >
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>Sri Upputuru Rajagopal - Smt. Swathi</strong>
+              </p>
+
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>(శ్రీ ఉప్పుటూరు రాజగోపాల్ - శ్రీమతి స్వాతి)</strong>
+              </p>
+            </div>
+
+            <!-- Family 4 -->
+            <div
+              class="glass-card rounded-2xl p-6 text-center border-2 border-deepGold/40 shadow-lg hover:shadow-xl transition duration-300"
+            >
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>Sri Gidigi Venkateswarlu - Smt. Ramadevi</strong>
+              </p>
+
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>(శ్రీ గిడిగి వెంకటేశ్వర్లు - శ్రీమతి రమాదేవి)</strong>
+              </p>
+            </div>
+
+            <!-- Family 4 -->
+            <div
+              class="glass-card rounded-2xl p-6 text-center border-2 border-deepGold/40 shadow-lg hover:shadow-xl transition duration-300"
+            >
+              <!-- Invitation Image -->
+              <div class="pt-4 min-w-0">
+                <div
+  class="w-24 h-24 md:w-36 md:h-36 mx-auto rounded-full overflow-hidden border-4 border-deepGold mb-3 md:mb-4 shadow-md"
+>
+  <img
+    src="./images/saanvi.png"
+    alt="Saanvi"
+    class="w-full h-full object-cover object-top"
+  />
+</div>
+
+              <!-- Telugu Invitation Text -->
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>
+                  మా మేనమామ వివాహం సందర్భంగా మిత్రులందరినీ ప్రేమతో
+                  ఆహ్వానిస్తున్నాము
+                </strong>
+              </p>
+
+              <br />
+
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>మా మామయ్య పెండ్లికి రండి! రారండి!!</strong>
+              </p>
+              <br />
+
+              <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>
+                  ప్రేమతో... <span class="text-royalRed">సాన్వీ</span>
+                </strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Blessings Footer -->
+          <div class="text-center mt-12">
+            <p class="font-yatra text-xl md:text-2xl text-royalCrimson">
+              మీ రాక మా కుటుంబాలకు ఆనందం
+            </p>
+
+            <p class="font-script text-3xl text-saffron mt-3">
+              With Warm Regards
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP SECTION -->
+      <section id="rsvp" class="py-20 px-4 bg-rose-50/50 relative">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-10">
+            <span class="font-script text-3xl text-saffron block"
+              >Subh Aagman</span
+            >
+            <h2
+              class="font-cinzel text-3xl md:text-4xl text-royalRed uppercase tracking-widest font-bold"
+            >
+              Blessings
+            </h2>
+            <p class="text-xs font-sans text-gray-600 mt-2">
+              Kindly confirm your presence by December 12, 2026
+            </p>
+          </div>
+
+          <div
+            class="glass-card p-6 md:p-10 rounded-3xl shadow-xl border-2 border-deepGold/50"
+          >
+            <form id="rsvpForm" onsubmit="handleRSVP(event)" class="space-y-5">
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label
+                    class="block font-cinzel text-xs font-bold uppercase text-royalRed mb-1"
+                    for="guestName"
+                    >Your Full Name *</label
+                  >
+                  <input
+                    type="text"
+                    id="guestName"
+                    required
+                    placeholder="e.g. Ramesh Kumar & Family"
+                    class="w-full px-4 py-3 rounded-xl border border-amber-300 focus:border-royalRed focus:ring-1 focus:ring-royalRed outline-none text-sm transition"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block font-cinzel text-xs font-bold uppercase text-royalRed mb-1"
+                    for="guestPhone"
+                    >Mobile Number (WhatsApp) *</label
+                  >
+                  <input
+                    type="tel"
+                    id="guestPhone"
+                    required
+                    placeholder="+91 98765 43210"
+                    class="w-full px-4 py-3 rounded-xl border border-amber-300 focus:border-royalRed focus:ring-1 focus:ring-royalRed outline-none text-sm transition"
+                  />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label
+                    class="block font-cinzel text-xs font-bold uppercase text-royalRed mb-1"
+                    >Attending Status *</label
+                  >
+                  <select
+                    id="attendanceStatus"
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-amber-300 focus:border-royalRed outline-none text-sm bg-white font-sans"
+                  >
+                    <option value="Attending">Attending</option>
+                    <option value="Not Attending">Not Attending</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block font-cinzel text-xs font-bold uppercase text-royalRed mb-1"
+                    >Total Family Members</label
+                  >
+                  <select
+                    id="plusOne"
+                    class="w-full px-4 py-3 rounded-xl border border-amber-300 focus:border-royalRed outline-none text-sm bg-white font-sans"
+                  >
+                    <option value="1 Member">1 Member</option>
+                    <option value="2 Members">2 Members</option>
+                    <option value="3 Members">3 Members</option>
+                    <option value="4 Members">4 Members</option>
+                    <option value="5+ Members (Entire Family)">
+                      Entire Family
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  class="block font-cinzel text-xs font-bold uppercase text-royalRed mb-1"
+                  for="guestMessage"
+                  >Blessings for Bride & Groom</label
+                >
+                <textarea
+                  id="guestMessage"
+                  rows="3"
+                  placeholder="Write your heartfelt blessings..."
+                  class="w-full px-4 py-3 rounded-xl border border-amber-300 focus:border-royalRed outline-none text-sm transition"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-royalRed via-royalCrimson to-royalRed text-brightGold font-cinzel font-bold uppercase tracking-widest py-4 rounded-xl shadow-xl hover:brightness-110 transition duration-300 transform active:scale-95"
+              >
+                <i class="fa-solid fa-paper-plane mr-2"></i> Submit Response &
+                Send Blessings
+              </button>
+            </form>
+          </div>
+
+          <div
+            class="mt-14 bg-white p-6 md:p-8 rounded-3xl border-2 border-deepGold/40 shadow-md"
+          >
+            <div
+              class="flex justify-between items-center mb-6 border-b border-deepGold/20 pb-4"
+            >
+              <div>
+                <h3 class="font-rozha text-2xl text-royalCrimson">
+                  Blessings Wall
+                </h3>
+                <p class="text-xs text-gray-500 font-sans">
+                  Wishes from family & well-wishers
+                </p>
+              </div>
+              <span
+                id="guestCountBadge"
+                class="bg-amber-100 text-royalCrimson font-cinzel text-xs font-bold px-3 py-1 rounded-full border border-deepGold"
+              >
+                0 Blessings
+              </span>
+            </div>
+            <div
+              id="guestListContainer"
+              class="space-y-4 max-h-80 overflow-y-auto pr-2"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INVITATION CARD MODAL -->
+      <div
+        id="invitationCardModal"
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4"
+      >
+        <div
+          class="bg-royalCrimson text-brightGold max-w-lg w-full rounded-3xl p-8 text-center shadow-2xl border-4 border-deepGold relative mandap-pattern"
+        >
+          <button
+            onclick="closeInvitationModal()"
+            class="absolute top-4 right-4 text-brightGold hover:text-white text-2xl"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <div class="text-3xl mb-2">🐘</div>
+          <p class="font-yatra text-brightGold text-lg mb-1">
+            || శ్రీ గణేశాయ నమః ||
+          </p>
+          <h3 class="font-rozha text-3xl text-white mb-2">
+            Wedding Invitation
+          </h3>
+          <div class="w-24 h-0.5 bg-brightGold mx-auto my-3"></div>
+
+          <p class="font-script text-3xl text-amber-200">
+            Rajesh &amp; Akshitha
+          </p>
+          <p
+            class="font-cinzel text-xs text-amber-100 uppercase tracking-widest my-3"
+          >
+            Saturday, 12th December 2026<br />
+            Ravi Teja Function Hall, Atmakur
+          </p>
+
+          <div
+            class="bg-royalRed/90 p-4 rounded-xl border border-deepGold/60 my-4 text-xs font-sans text-amber-100 leading-relaxed"
+          >
+            <p class="font-bold font-cinzel text-brightGold mb-1">
+              SPECIAL INVITEE PASS
+            </p>
+            This card serves as a digital entry pass for all ceremonies. Please
+            present at the venue reception.
+          </div>
+
+          <div class="flex gap-3 justify-center pt-2">
+            <button
+              onclick="window.print()"
+              class="bg-gradient-to-r from-brightGold to-deepGold text-royalCrimson font-cinzel font-bold text-xs uppercase px-6 py-2.5 rounded-full shadow hover:brightness-110"
+            >
+              <i class="fa-solid fa-print mr-1"></i> Print / Save PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RSVP CONFIRMATION MODAL -->
+      <div
+        id="rsvpModal"
+        class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4"
+      >
+        <div
+          class="bg-white max-w-md w-full rounded-3xl p-8 text-center shadow-2xl border-2 border-deepGold"
+        >
+          <div
+            class="w-16 h-16 bg-amber-100 text-royalRed rounded-full flex items-center justify-center mx-auto mb-4 text-3xl"
+          >
+            🙏
+          </div>
+          <h3 class="font-rozha text-2xl text-royalCrimson mb-2">Thank you</h3>
+          <p id="rsvpModalMessage" class="text-sm text-gray-700 font-sans mb-6">
+            Your blessings & response have been registered with love.
+          </p>
+          <button
+            onclick="closeRsvpModal()"
+            class="bg-royalRed text-brightGold font-cinzel font-bold text-xs uppercase tracking-widest px-8 py-3 rounded-full shadow hover:bg-royalCrimson"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer
+        class="bg-royalCrimson text-brightGold py-10 border-t-2 border-deepGold text-center text-xs"
+      >
+        <div class="max-w-4xl mx-auto px-4 space-y-3 font-cinzel">
+          <p class="text-lg">|| ఓం నమః శివాయ ||</p>
+          <p class="font-script text-3xl text-white">Rajesh &amp; Akshitha</p>
+          <p class="tracking-widest text-[10px] text-amber-200/80 uppercase">
+            December 12, 2026 • Atmakur, Nellore
+          </p>
+          <p class="text-[10px] text-amber-100/50 pt-2 font-sans">
+            Crafted with devotion for an authentic Wedding experience.
+          </p>
+        </div>
+      </footer>
+
+      <!-- Custom JS -->
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>
