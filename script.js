@@ -765,6 +765,8 @@ window.addEventListener("load", () => {
     openButton.addEventListener("click", () => {
       openingInvitation.classList.add("opened");
 
+       playMusic();
+
       setTimeout(() => {
         openingInvitation.remove();
 
